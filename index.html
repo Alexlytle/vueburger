@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burger Builder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@300;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/style.css">
+    
+</head>
+<body>
+    <div id="app">
+        <div class="wrapper">
+            <!-- {{addToppings}} -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 burger-left">
+             
+
+                        <!-- <p</p> -->
+                        <div class="box">
+                            <div class="bread-top">
+                              <div class="seeds"></div>
+                              <div class="seeds2"></div>
+                            </div>
+                                <!-- {{addToppings[0].salad}} -->
+                                <div v-if="addToppings[0].salad.length == 0 && addToppings[1].bacon.length == 0 && addToppings[2].cheese.length == 0 
+                                && addToppings[3].meat.length == 0 ">
+                                    <p style="text-align: center;">Please start adding ingredients!</p>
+                                </div>
+                 
+
+                            <div v-for="addTopping in addToppings[0].salad" :class="[addTopping.topping == 'Salad:'?'salad':'']" > </div>
+                            <div v-for="addTopping in addToppings[1].bacon" :class="[addTopping.topping == 'Bacon:'?'bacon':'']"></div>
+                            <div v-for="addTopping in addToppings[2].cheese" :class="[addTopping.topping == 'Cheese:'?'cheese':'']"></div>
+                            <div v-for="addTopping in addToppings[3].meat" :class="[addTopping.topping == 'Meat:'?'meat':'']"></div>
+
+                      
+                            <!-- <div  v-for="addTopping in addToppings" :class="[addTopping.topping =='Meat:'?'meat':'']"></div> -->
+                      
+                            <div class="bread-bottom"></div>
+                          </div>
+                    </div>
+                    <div class="col-md-12 burger-right">
+                            <div class="burger-control">
+                                <h1>Burger Builder</h1>
+                                <h3>Price: ${{formatPrice(totalPrice)}}</h3>
+                               
+                                    <ul v-for="burgerOption in burgerOptions" class="options" >
+                                        <li class="topping" >{{burgerOption.topping}}</li>
+                                        <button @click="removeTopping(burgerOption.topping,burgerOption.id)" :class="[burgerOption.activeCount.length == 0?'not-active-less':'active-less']"  :disabled="burgerOption.activeCount.length == 0"   :data-id="burgerOption.id">Less</button>
+                                        <li @click="addTopping($event)" class="more" :data-id="burgerOption.id">More</li>
+                                    </ul>
+                                
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="./assets/app.js"></script>
+</body>
+</html>
